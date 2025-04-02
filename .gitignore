@@ -1,0 +1,22 @@
+# PHP files
+.env
+/vendor/
+composer.lock
+
+# Database credentials
+config.php
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# Logs
+*.log
+logs/
+error_log 
