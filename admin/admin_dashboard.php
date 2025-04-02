@@ -45,6 +45,7 @@ $reservations = $pdo->query("SELECT * FROM reservations ORDER BY reservation_fro
     <div class="admin-content">
         <div class="admin-header">
             <h1>Reservation Management</h1>
+            <button type="button" class="btn btn-create" onclick="showCreateForm()">Create New Reservation</button>
         </div>
         
         <div class="admin-table-container">
@@ -141,6 +142,59 @@ $reservations = $pdo->query("SELECT * FROM reservations ORDER BY reservation_fro
         </div>
     </div>
 
+    <!-- Create Modal -->
+    <div id="createModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h2>Create New Reservation</h2>
+            <form method="post" id="createForm">
+                <div class="form-group">
+                    <label for="create_name">Guest Name</label>
+                    <input type="text" name="name" id="create_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="create_contact">Contact Number</label>
+                    <input type="text" name="contact_number" id="create_contact" required>
+                </div>
+                <div class="form-group">
+                    <label for="create_from">Check In</label>
+                    <input type="date" name="reservation_from" id="create_from" required>
+                </div>
+                <div class="form-group">
+                    <label for="create_to">Check Out</label>
+                    <input type="date" name="reservation_to" id="create_to" required>
+                </div>
+                <div class="form-group">
+                    <label for="create_room">Room Type</label>
+                    <select name="room_type" id="create_room" required>
+                        <option value="Regular">Regular</option>
+                        <option value="Deluxe">Deluxe</option>
+                        <option value="Suite">Suite</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="create_capacity">Room Capacity</label>
+                    <select name="room_capacity" id="create_capacity" required>
+                        <option value="Single">Single</option>
+                        <option value="Double">Double</option>
+                        <option value="Family">Family</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="create_payment">Payment Type</label>
+                    <select name="payment_type" id="create_payment" required>
+                        <option value="Cash">Cash</option>
+                        <option value="Credit">Credit</option>
+                        <option value="Cheque">Cheque</option>
+                    </select>
+                </div>
+                <div class="form-buttons">
+                    <button type="submit" name="add" class="btn">Create Reservation</button>
+                    <button type="button" class="btn btn-cancel" onclick="hideCreateForm()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script>
     function showEditForm(reservation) {
         document.getElementById('edit_id').value = reservation.id;
@@ -158,10 +212,21 @@ $reservations = $pdo->query("SELECT * FROM reservations ORDER BY reservation_fro
         document.getElementById('editModal').style.display = 'none';
     }
 
+    function showCreateForm() {
+        document.getElementById('createModal').style.display = 'block';
+    }
+
+    function hideCreateForm() {
+        document.getElementById('createModal').style.display = 'none';
+    }
+
     // Close modal when clicking outside
     window.onclick = function(event) {
         if (event.target == document.getElementById('editModal')) {
             hideEditForm();
+        }
+        if (event.target == document.getElementById('createModal')) {
+            hideCreateForm();
         }
     }
     </script>
