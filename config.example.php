@@ -1,5 +1,5 @@
 <?php
-// Database configuration
+// DATABASE CONFIG
 $host = 'localhost';
 $dbname = 'hotel_reservation';
 $username = 'your_username';

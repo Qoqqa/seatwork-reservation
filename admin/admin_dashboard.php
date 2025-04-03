@@ -7,7 +7,7 @@ if (!isset($_SESSION['admin_logged_in'])) {
 
 require 'db.php';
 
-// Handle CRUD operations
+// CRUD OPERATIONS
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['add'])) {
         $stmt = $pdo->prepare("INSERT INTO reservations (name, contact_number, reservation_from, reservation_to, room_type, room_capacity, payment_type) VALUES (?, ?, ?, ?, ?, ?, ?)");
@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Fetch all reservations
+// FETCH RESERVATIONS
 $reservations = $pdo->query("SELECT * FROM reservations ORDER BY reservation_from DESC")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -88,7 +88,7 @@ $reservations = $pdo->query("SELECT * FROM reservations ORDER BY reservation_fro
         </div>
     </div>
 
-    <!-- Edit Modal -->
+    <!-- EDIT MODAL -->
     <div id="editModal" class="modal" style="display: none;">
         <div class="modal-content">
             <h2>Edit Reservation</h2>
@@ -142,7 +142,7 @@ $reservations = $pdo->query("SELECT * FROM reservations ORDER BY reservation_fro
         </div>
     </div>
 
-    <!-- Create Modal -->
+    <!-- CREATE MODAL -->
     <div id="createModal" class="modal" style="display: none;">
         <div class="modal-content">
             <h2>Create New Reservation</h2>
@@ -220,7 +220,7 @@ $reservations = $pdo->query("SELECT * FROM reservations ORDER BY reservation_fro
         document.getElementById('createModal').style.display = 'none';
     }
 
-    // Close modal when clicking outside
+    // CLOSE MODAL OUTSIDE CLICK
     window.onclick = function(event) {
         if (event.target == document.getElementById('editModal')) {
             hideEditForm();
