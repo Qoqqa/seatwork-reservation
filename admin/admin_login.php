@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Check admin credentials
+    // CHECK CREDENTIALS
     $stmt = $pdo->prepare("SELECT * FROM admins WHERE username = ? AND password = ?");
     $stmt->execute([$username, $password]);
     $admin = $stmt->fetch(PDO::FETCH_ASSOC);

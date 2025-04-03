@@ -3,7 +3,7 @@
 
 <head>
     <title>Reservation - Horseplay Hotel</title>
-    <link rel="stylesheet" href="/myapplication/seatworkreservation/style.css?v=1.0">
+    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <meta charset="UTF-8">
@@ -28,7 +28,6 @@
     $summary = null;
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Retrieve form data
         $name = $_POST['name'];
         $number = $_POST['number'];
         $from = $_POST['from'];
@@ -37,7 +36,7 @@
         $capacity = $_POST['capacity'] ?? null;
         $payment = $_POST['payment'] ?? null;
 
-        // Calculate reservation details
+        // CALCULATION 
         $startDate = new DateTime($from);
         $endDate = new DateTime($to);
         $days = $startDate->diff($endDate)->days;
@@ -69,11 +68,11 @@
 
             $total = $subtotal - $discount + $additionalCharge;
 
-            // Insert reservation into the database
+            // INSERT INTO DATABASE
             $stmt = $pdo->prepare("INSERT INTO reservations (name, contact_number, reservation_from, reservation_to, room_type, room_capacity, payment_type) VALUES (?, ?, ?, ?, ?, ?, ?)");
             $stmt->execute([$name, $number, $from, $to, $room, $capacity, $payment]);
 
-            // Prepare summary
+            // SUMMARY
             $summary = "<h2>Reservation Summary</h2>";
             $summary .= "<p>Name: $name</p>";
             $summary .= "<p>Contact Number: $number</p>";
